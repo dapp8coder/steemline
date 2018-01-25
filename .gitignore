@@ -18,4 +18,7 @@
 /web/assets/vendor/
 /web/css/
 /web/js/
+/node_modules/*
+package-lock.json
+package.json
 .idea
