@@ -5,17 +5,7 @@ var cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
 app.use(express.static('web/'));
-app.use(express.static('web/assets'));
-app.use(express.static('web/assets/css'));
-app.use(express.static('web/assets/js'));
-app.use(express.static('web/assets/vendor/jquery-ui/themes/base'));
-app.use(express.static('web/assets/vendor/uikit/css/components'));
-app.use(express.static('web/assets/vendor/uikit/css'));
-app.use(express.static('web/assets/vendor/codemirror/lib'));
-app.use(express.static('web/assets/vendor/uikit/css/components'));
-app.use(express.static('web/assets/vendor/'));
 
-// app.set('views', 'E:\\Programs\\Web Practice\\Steemit\\steemline\\app\\Resources\\views\\default');
 app.set('views', 'E:\\Programs\\Web Practice\\Steemit\\steemline\\app\\Resources\\views');
 
 app.get('/logout', function (req, res) {
