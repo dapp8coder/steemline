@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var Twig = require("twig");
 var cookieParser = require('cookie-parser');
+var request = require('request');
 app.use(cookieParser());
 
 app.use(express.static('web/'));
@@ -12,6 +13,40 @@ app.get('/logout', function (req, res) {
     res.clearCookie('accesstoken');
     res.clearCookie('username');
     res.redirect('/index.html');
+});
+
+app.get('/api/mentions', function (req, res) {
+	var username = req.query.username;
+	var comments = req.query.comments;
+	var own = req.query.own;
+
+	request('http://api.comprendre-steem.fr/getMentions?comments='+comments+'&own_comments='+own+'&username='+username, function (error, response, body) {
+	  if(!error && response.statusCode==200) {
+	  	res.send(body)
+	  }
+	});
+});
+
+app.get('/api/votes', function (req, res) {
+	var username = req.query.username;
+	var perpage = req.query.perpage;
+
+	request('http://api.comprendre-steem.fr/getIncomingVotes?username='+username+'&limit='+perpage, function (error, response, body) {
+	  if(!error && response.statusCode==200) {
+	  	res.send(body)
+	  }
+	});
+});
+
+app.get('/api/votesCount', function (req, res) {
+	var username = req.query.username;
+
+	request('http://api.comprendre-steem.fr/getIncomingVotes?username='+username+'&limit='+10000, function (error, response, body) {
+	  if(!error && response.statusCode==200) {
+	  	var b = JSON.parse(body);
+	  	res.send(b.size.toString());
+	  }
+	});
 });
 
 app.get('/auth', function (req, res) {
