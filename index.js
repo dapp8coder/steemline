@@ -7,7 +7,7 @@ app.use(cookieParser());
 
 app.use(express.static('web/'));
 
-app.set('views', 'E:\\Programs\\Web Practice\\Steemit\\steemline\\app\\Resources\\views');
+app.set('views', './app/Resources/views');
 
 app.get('/logout', function (req, res) {
     res.clearCookie('accesstoken');
